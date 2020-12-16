@@ -1,349 +1,369 @@
-[
-   {
-      "form_field_id": 7188,
-      "form_id": 913,
-      "label": "Your Email Address",
-      "placeholder": null,
-      "field_type_id": 7,
-      "default_value": null,
-      "is_required": true,
-      "sort_order": 0,
-      "created_at": "2020-12-11 07:17:49",
-      "updated_at": null,
-      "unique_id": "228KVgKtUj",
-      "save_as_option": {
-         "type": "default_fields",
-         "value": "email",
-         "update_existing": false
+{
+   "options": {
+      "page": {
+         "page_title": "Form Ege'nin",
+         "page_description": "Form Ege'nin Form Ege'nin"
       },
-      "description": null,
-      "extra": [
-      ],
-      "logic": null,
-      "hidden_field": false,
-      "is_hidden": false,
-      "attributes": null,
-      "form_field_type": {
-         "form_field_type_id": 7,
-         "type": "email",
-         "created_at": "2018-09-06 12:57:07",
-         "updated_at": "2020-04-09 10:57:38",
-         "detail": "Email",
-         "icon": "envelope",
-         "save_as": {
+      "welcome_message": {
+         "title": "Welcome to Ege's form",
+         "description": "Welcome to Ege's form Welcome to Ege's form"
+      },
+      "goodbye_message": {
+         "title": "Goodbye",
+         "description": "Have a great day"
+      },
+      "notify_contact": {
+         "mail_template_id": "null",
+         "sms_text": null
+      }
+   },
+   "data": [
+      {
+         "form_field_id": 7188,
+         "form_id": 913,
+         "label": "Your Email Address",
+         "placeholder": null,
+         "field_type_id": 7,
+         "default_value": null,
+         "is_required": true,
+         "sort_order": 0,
+         "created_at": "2020-12-11 07:17:49",
+         "updated_at": null,
+         "unique_id": "228KVgKtUj",
+         "save_as_option": {
             "type": "default_fields",
             "value": "email",
             "update_existing": false
-         }
-      },
-      "form_field_options": [
-      ]
-   },
-   {
-      "form_field_id": 7190,
-      "form_id": 913,
-      "label": "Yes mi No mu?",
-      "placeholder": null,
-      "field_type_id": 3,
-      "default_value": null,
-      "is_required": true,
-      "sort_order": 2,
-      "created_at": "2020-12-11 07:18:01",
-      "updated_at": "2020-12-11 07:18:52",
-      "unique_id": "87atG1z83f",
-      "save_as_option": [
-      ],
-      "description": null,
-      "extra": [
-      ],
-      "logic": null,
-      "hidden_field": false,
-      "is_hidden": false,
-      "attributes": null,
-      "form_field_type": {
-         "form_field_type_id": 3,
-         "type": "selectbox",
-         "created_at": "2018-09-06 12:42:57",
-         "updated_at": "2020-03-02 09:34:01",
-         "detail": "Single Selection",
-         "icon": "chevron-square-down",
-         "save_as": null
-      },
-      "form_field_options": [
-         {
-            "form_field_option_id": 23169,
-            "form_field_id": 7190,
-            "option_value": "bdd11089-43db-442f-acf5-aaff93a535d7",
-            "option_label": "Yes",
-            "created_at": "2020-12-11 07:18:01",
-            "updated_at": "2020-12-11 07:18:14",
-            "option_score": null,
-            "sort_order": 0,
-            "extra": null
          },
-         {
-            "form_field_option_id": 23170,
-            "form_field_id": 7190,
-            "option_value": "93effaca-0cf3-48bf-aa0a-a10dd9c006ef",
-            "option_label": "No",
-            "created_at": "2020-12-11 07:18:01",
-            "updated_at": "2020-12-11 07:18:23",
-            "option_score": null,
-            "sort_order": 1,
-            "extra": null
-         }
-      ]
-   },
-   {
-      "form_field_id": 7191,
-      "form_id": 913,
-      "label": "Hangi checkbox",
-      "placeholder": null,
-      "field_type_id": 4,
-      "default_value": null,
-      "is_required": true,
-      "sort_order": 3,
-      "created_at": "2020-12-11 07:18:26",
-      "updated_at": "2020-12-11 07:18:55",
-      "unique_id": "OvT7LAzkhM",
-      "save_as_option": [
-      ],
-      "description": null,
-      "extra": [
-      ],
-      "logic": null,
-      "hidden_field": false,
-      "is_hidden": false,
-      "attributes": null,
-      "form_field_type": {
-         "form_field_type_id": 4,
-         "type": "checkbox",
-         "created_at": "2018-09-06 12:43:00",
-         "updated_at": "2020-03-02 09:34:01",
-         "detail": "Multiple Selection",
-         "icon": "check-square",
-         "save_as": null
-      },
-      "form_field_options": [
-         {
-            "form_field_option_id": 23171,
-            "form_field_id": 7191,
-            "option_value": "273ff3a2-bf6b-43c1-8bd2-db0e585f6533",
-            "option_label": "Bu checkbox",
-            "created_at": "2020-12-11 07:18:26",
-            "updated_at": "2020-12-11 07:18:42",
-            "option_score": null,
-            "sort_order": 0,
-            "extra": null
+         "description": null,
+         "extra": [
+         ],
+         "logic": null,
+         "hidden_field": false,
+         "is_hidden": false,
+         "attributes": null,
+         "form_field_type": {
+            "form_field_type_id": 7,
+            "type": "email",
+            "created_at": "2018-09-06 12:57:07",
+            "updated_at": "2020-04-09 10:57:38",
+            "detail": "Email",
+            "icon": "envelope",
+            "save_as": {
+               "type": "default_fields",
+               "value": "email",
+               "update_existing": false
+            }
          },
-         {
-            "form_field_option_id": 23172,
-            "form_field_id": 7191,
-            "option_value": "4f37c849-e10f-455b-b3ba-cc5d9cd926b1",
-            "option_label": "Hay\u0131r bu checkbox",
-            "created_at": "2020-12-11 07:18:26",
-            "updated_at": "2020-12-11 07:18:48",
-            "option_score": null,
-            "sort_order": 1,
-            "extra": null
-         }
-      ]
-   },
-   {
-      "form_field_id": 7192,
-      "form_id": 913,
-      "label": "Tarih giriniz",
-      "placeholder": null,
-      "field_type_id": 6,
-      "default_value": null,
-      "is_required": true,
-      "sort_order": 4,
-      "created_at": "2020-12-11 07:19:06",
-      "updated_at": "2020-12-11 07:19:13",
-      "unique_id": "wwiTyr0Ob7",
-      "save_as_option": [
-      ],
-      "description": null,
-      "extra": [
-      ],
-      "logic": null,
-      "hidden_field": false,
-      "is_hidden": false,
-      "attributes": null,
-      "form_field_type": {
-         "form_field_type_id": 6,
-         "type": "date",
-         "created_at": "2018-09-06 12:57:05",
-         "updated_at": "2020-02-20 09:20:32",
-         "detail": "Date",
-         "icon": "calendar-alt",
-         "save_as": null
+         "form_field_options": [
+         ]
       },
-      "form_field_options": [
-      ]
-   },
-   {
-      "form_field_id": 7193,
-      "form_id": 913,
-      "label": "Telefon giriniz",
-      "placeholder": null,
-      "field_type_id": 8,
-      "default_value": null,
-      "is_required": true,
-      "sort_order": 5,
-      "created_at": "2020-12-11 07:19:18",
-      "updated_at": "2020-12-11 07:19:24",
-      "unique_id": "DBqRBBESfX",
-      "save_as_option": {
-         "type": "default_fields",
-         "value": "mobile_phone",
-         "update_existing": false
+      {
+         "form_field_id": 7190,
+         "form_id": 913,
+         "label": "Yes mi No mu?",
+         "placeholder": null,
+         "field_type_id": 3,
+         "default_value": null,
+         "is_required": true,
+         "sort_order": 2,
+         "created_at": "2020-12-11 07:18:01",
+         "updated_at": "2020-12-11 07:18:52",
+         "unique_id": "87atG1z83f",
+         "save_as_option": [
+         ],
+         "description": null,
+         "extra": [
+         ],
+         "logic": null,
+         "hidden_field": false,
+         "is_hidden": false,
+         "attributes": null,
+         "form_field_type": {
+            "form_field_type_id": 3,
+            "type": "selectbox",
+            "created_at": "2018-09-06 12:42:57",
+            "updated_at": "2020-03-02 09:34:01",
+            "detail": "Single Selection",
+            "icon": "chevron-square-down",
+            "save_as": null
+         },
+         "form_field_options": [
+            {
+               "form_field_option_id": 23169,
+               "form_field_id": 7190,
+               "option_value": "bdd11089-43db-442f-acf5-aaff93a535d7",
+               "option_label": "Yes",
+               "created_at": "2020-12-11 07:18:01",
+               "updated_at": "2020-12-11 07:18:14",
+               "option_score": null,
+               "sort_order": 0,
+               "extra": null
+            },
+            {
+               "form_field_option_id": 23170,
+               "form_field_id": 7190,
+               "option_value": "93effaca-0cf3-48bf-aa0a-a10dd9c006ef",
+               "option_label": "No",
+               "created_at": "2020-12-11 07:18:01",
+               "updated_at": "2020-12-11 07:18:23",
+               "option_score": null,
+               "sort_order": 1,
+               "extra": null
+            }
+         ]
       },
-      "description": null,
-      "extra": [
-      ],
-      "logic": null,
-      "hidden_field": false,
-      "is_hidden": false,
-      "attributes": null,
-      "form_field_type": {
-         "form_field_type_id": 8,
-         "type": "phone",
-         "created_at": "2018-09-06 12:57:09",
-         "updated_at": "2020-04-13 13:05:40",
-         "detail": "Mobile Phone",
-         "icon": "mobile",
-         "save_as": {
+      {
+         "form_field_id": 7191,
+         "form_id": 913,
+         "label": "Hangi checkbox",
+         "placeholder": null,
+         "field_type_id": 4,
+         "default_value": null,
+         "is_required": true,
+         "sort_order": 3,
+         "created_at": "2020-12-11 07:18:26",
+         "updated_at": "2020-12-11 07:18:55",
+         "unique_id": "OvT7LAzkhM",
+         "save_as_option": [
+         ],
+         "description": null,
+         "extra": [
+         ],
+         "logic": null,
+         "hidden_field": false,
+         "is_hidden": false,
+         "attributes": null,
+         "form_field_type": {
+            "form_field_type_id": 4,
+            "type": "checkbox",
+            "created_at": "2018-09-06 12:43:00",
+            "updated_at": "2020-03-02 09:34:01",
+            "detail": "Multiple Selection",
+            "icon": "check-square",
+            "save_as": null
+         },
+         "form_field_options": [
+            {
+               "form_field_option_id": 23171,
+               "form_field_id": 7191,
+               "option_value": "273ff3a2-bf6b-43c1-8bd2-db0e585f6533",
+               "option_label": "Bu checkbox",
+               "created_at": "2020-12-11 07:18:26",
+               "updated_at": "2020-12-11 07:18:42",
+               "option_score": null,
+               "sort_order": 0,
+               "extra": null
+            },
+            {
+               "form_field_option_id": 23172,
+               "form_field_id": 7191,
+               "option_value": "4f37c849-e10f-455b-b3ba-cc5d9cd926b1",
+               "option_label": "Hay\u0131r bu checkbox",
+               "created_at": "2020-12-11 07:18:26",
+               "updated_at": "2020-12-11 07:18:48",
+               "option_score": null,
+               "sort_order": 1,
+               "extra": null
+            }
+         ]
+      },
+      {
+         "form_field_id": 7192,
+         "form_id": 913,
+         "label": "Tarih giriniz",
+         "placeholder": null,
+         "field_type_id": 6,
+         "default_value": null,
+         "is_required": true,
+         "sort_order": 4,
+         "created_at": "2020-12-11 07:19:06",
+         "updated_at": "2020-12-11 07:19:13",
+         "unique_id": "wwiTyr0Ob7",
+         "save_as_option": [
+         ],
+         "description": null,
+         "extra": [
+         ],
+         "logic": null,
+         "hidden_field": false,
+         "is_hidden": false,
+         "attributes": null,
+         "form_field_type": {
+            "form_field_type_id": 6,
+            "type": "date",
+            "created_at": "2018-09-06 12:57:05",
+            "updated_at": "2020-02-20 09:20:32",
+            "detail": "Date",
+            "icon": "calendar-alt",
+            "save_as": null
+         },
+         "form_field_options": [
+         ]
+      },
+      {
+         "form_field_id": 7193,
+         "form_id": 913,
+         "label": "Telefon giriniz",
+         "placeholder": null,
+         "field_type_id": 8,
+         "default_value": null,
+         "is_required": true,
+         "sort_order": 5,
+         "created_at": "2020-12-11 07:19:18",
+         "updated_at": "2020-12-11 07:19:24",
+         "unique_id": "DBqRBBESfX",
+         "save_as_option": {
             "type": "default_fields",
             "value": "mobile_phone",
             "update_existing": false
-         }
+         },
+         "description": null,
+         "extra": [
+         ],
+         "logic": null,
+         "hidden_field": false,
+         "is_hidden": false,
+         "attributes": null,
+         "form_field_type": {
+            "form_field_type_id": 8,
+            "type": "phone",
+            "created_at": "2018-09-06 12:57:09",
+            "updated_at": "2020-04-13 13:05:40",
+            "detail": "Mobile Phone",
+            "icon": "mobile",
+            "save_as": {
+               "type": "default_fields",
+               "value": "mobile_phone",
+               "update_existing": false
+            }
+         },
+         "form_field_options": [
+         ]
       },
-      "form_field_options": [
-      ]
-   },
-   {
-      "form_field_id": 7194,
-      "form_id": 913,
-      "label": "Ad",
-      "placeholder": null,
-      "field_type_id": 23,
-      "default_value": null,
-      "is_required": true,
-      "sort_order": 6,
-      "created_at": "2020-12-11 07:19:45",
-      "updated_at": "2020-12-11 07:19:50",
-      "unique_id": "ixQ6vvI8R2",
-      "save_as_option": {
-         "type": "default_fields",
-         "value": "name",
-         "update_existing": true
-      },
-      "description": null,
-      "extra": [
-      ],
-      "logic": null,
-      "hidden_field": false,
-      "is_hidden": false,
-      "attributes": null,
-      "form_field_type": {
-         "form_field_type_id": 23,
-         "type": "firstname",
-         "created_at": "2020-03-23 11:22:34",
-         "updated_at": "2020-06-11 12:44:47",
-         "detail": "First Name",
-         "icon": "clipboard-user",
-         "save_as": {
+      {
+         "form_field_id": 7194,
+         "form_id": 913,
+         "label": "Ad",
+         "placeholder": null,
+         "field_type_id": 23,
+         "default_value": null,
+         "is_required": true,
+         "sort_order": 6,
+         "created_at": "2020-12-11 07:19:45",
+         "updated_at": "2020-12-11 07:19:50",
+         "unique_id": "ixQ6vvI8R2",
+         "save_as_option": {
             "type": "default_fields",
             "value": "name",
             "update_existing": true
-         }
+         },
+         "description": null,
+         "extra": [
+         ],
+         "logic": null,
+         "hidden_field": false,
+         "is_hidden": false,
+         "attributes": null,
+         "form_field_type": {
+            "form_field_type_id": 23,
+            "type": "firstname",
+            "created_at": "2020-03-23 11:22:34",
+            "updated_at": "2020-06-11 12:44:47",
+            "detail": "First Name",
+            "icon": "clipboard-user",
+            "save_as": {
+               "type": "default_fields",
+               "value": "name",
+               "update_existing": true
+            }
+         },
+         "form_field_options": [
+         ]
       },
-      "form_field_options": [
-      ]
-   },
-   {
-      "form_field_id": 7195,
-      "form_id": 913,
-      "label": "Soyad",
-      "placeholder": null,
-      "field_type_id": 24,
-      "default_value": null,
-      "is_required": true,
-      "sort_order": 7,
-      "created_at": "2020-12-11 07:19:53",
-      "updated_at": "2020-12-11 07:19:57",
-      "unique_id": "bR70ceAbLb",
-      "save_as_option": {
-         "type": "default_fields",
-         "value": "surname",
-         "update_existing": true
-      },
-      "description": null,
-      "extra": [
-      ],
-      "logic": null,
-      "hidden_field": false,
-      "is_hidden": false,
-      "attributes": null,
-      "form_field_type": {
-         "form_field_type_id": 24,
-         "type": "surname",
-         "created_at": "2020-03-23 11:22:34",
-         "updated_at": "2020-06-11 12:44:47",
-         "detail": "Last Name",
-         "icon": "clipboard-user",
-         "save_as": {
+      {
+         "form_field_id": 7195,
+         "form_id": 913,
+         "label": "Soyad",
+         "placeholder": null,
+         "field_type_id": 24,
+         "default_value": null,
+         "is_required": true,
+         "sort_order": 7,
+         "created_at": "2020-12-11 07:19:53",
+         "updated_at": "2020-12-11 07:19:57",
+         "unique_id": "bR70ceAbLb",
+         "save_as_option": {
             "type": "default_fields",
             "value": "surname",
             "update_existing": true
-         }
+         },
+         "description": null,
+         "extra": [
+         ],
+         "logic": null,
+         "hidden_field": false,
+         "is_hidden": false,
+         "attributes": null,
+         "form_field_type": {
+            "form_field_type_id": 24,
+            "type": "surname",
+            "created_at": "2020-03-23 11:22:34",
+            "updated_at": "2020-06-11 12:44:47",
+            "detail": "Last Name",
+            "icon": "clipboard-user",
+            "save_as": {
+               "type": "default_fields",
+               "value": "surname",
+               "update_existing": true
+            }
+         },
+         "form_field_options": [
+         ]
       },
-      "form_field_options": [
-      ]
-   },
-   {
-      "form_field_id": 7189,
-      "form_id": 913,
-      "label": "Please confirm that it is okay for us to contact you about this information as well as products and services. (You will always be given the right to unsubscribe at any point in the future)",
-      "placeholder": null,
-      "field_type_id": 4,
-      "default_value": null,
-      "is_required": true,
-      "sort_order": 1000,
-      "created_at": "2020-12-11 07:17:49",
-      "updated_at": null,
-      "unique_id": "mGnL3y7qoW",
-      "save_as_option": null,
-      "description": null,
-      "extra": {
-         "field_type": "legacy"
-      },
-      "logic": null,
-      "hidden_field": true,
-      "is_hidden": false,
-      "attributes": null,
-      "form_field_type": {
-         "form_field_type_id": 4,
-         "type": "checkbox",
-         "created_at": "2018-09-06 12:43:00",
-         "updated_at": "2020-03-02 09:34:01",
-         "detail": "Multiple Selection",
-         "icon": "check-square",
-         "save_as": null
-      },
-      "form_field_options": [
-         {
-            "form_field_option_id": 23168,
-            "form_field_id": 7189,
-            "option_value": "xTdah1QqGr1607671069",
-            "option_label": "Confirm",
-            "created_at": "2020-12-11 07:17:49",
-            "updated_at": null,
-            "option_score": null,
-            "sort_order": 1,
-            "extra": null
-         }
-      ]
-   }
-]
+      {
+         "form_field_id": 7189,
+         "form_id": 913,
+         "label": "Please confirm that it is okay for us to contact you about this information as well as products and services. (You will always be given the right to unsubscribe at any point in the future)",
+         "placeholder": null,
+         "field_type_id": 4,
+         "default_value": null,
+         "is_required": true,
+         "sort_order": 1000,
+         "created_at": "2020-12-11 07:17:49",
+         "updated_at": null,
+         "unique_id": "mGnL3y7qoW",
+         "save_as_option": null,
+         "description": null,
+         "extra": {
+            "field_type": "legacy"
+         },
+         "logic": null,
+         "hidden_field": true,
+         "is_hidden": false,
+         "attributes": null,
+         "form_field_type": {
+            "form_field_type_id": 4,
+            "type": "checkbox",
+            "created_at": "2018-09-06 12:43:00",
+            "updated_at": "2020-03-02 09:34:01",
+            "detail": "Multiple Selection",
+            "icon": "check-square",
+            "save_as": null
+         },
+         "form_field_options": [
+            {
+               "form_field_option_id": 23168,
+               "form_field_id": 7189,
+               "option_value": "xTdah1QqGr1607671069",
+               "option_label": "Confirm",
+               "created_at": "2020-12-11 07:17:49",
+               "updated_at": null,
+               "option_score": null,
+               "sort_order": 1,
+               "extra": null
+            }
+         ]
+      }
+   ]
+}

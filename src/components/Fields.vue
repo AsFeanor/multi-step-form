@@ -1,6 +1,7 @@
 <template>
   <div class="container mt-5">
-    <div class="row justify-content-center">
+    <WelcomeMessage @goToForm="goToForm" v-if="welcomeExist === true"></WelcomeMessage>
+    <div v-if="welcomeExist === false && goodbyeExist === false" class="row justify-content-center">
       <div class="col-6">
         <form id="myForm" @submit.prevent="next">
           <div class="form-group container" @keyup.left="prev" v-if="activeStep.form.field_type_id === 7">
@@ -151,39 +152,72 @@
         <pre>{{ forms }}</pre>
       </div>
     </div>
+    <GoodbyeMessage @submitOnGoodbye="SubmitOnGoodbye" v-if="goodbyeExist === true"></GoodbyeMessage>
   </div>
 </template>
 
 <script>
 import formData from '../../form_data.json';
-import {required, minLength, email} from 'vuelidate/lib/validators'
+import WelcomeMessage from "@/components/WelcomeMessage";
+import GoodbyeMessage from "@/components/GoodbyeMessage";
+import router from "@/router";
 
 
 export default {
   name: "Fields",
+  components: {
+    WelcomeMessage,
+    GoodbyeMessage
+  },
   data() {
     return {
       forms: {},
       errors: [],
       step: 1,
       form_data: formData,
-      activeStep: {stepId: 0, form: formData[0]},
-      submitStatus: null
+      activeStep: {stepId: 0, form: formData.data[0]},
+      submitStatus: null,
+      welcomeExist: true,
+      goodbyeExist: false,
     }
   },
   mounted() {
-    const formsData = this.forms
-    $.each(formData, (key, value) => {
-      this.$set(formsData, value.unique_id, [])
-    })
-    console.log(formsData)
-    return formsData
-
+    this.setForms()
+    this.setWelcomeExist()
   },
   methods: {
+    // Welcome Message Controls
+    setWelcomeExist() {
+      this.welcomeExist = formData.options.welcome_message.title != null;
+    },
+    goToForm() {
+      return this.welcomeExist = false
+    },
+
+    // Goodbye Message Controls
+    SubmitOnGoodbye() {
+      console.log(this.forms);
+      alert('SUBMITTED')
+      this.goodbyeExist = false
+      setTimeout(() => {
+        router.go(0)
+      }, 1000)
+    },
+
+    // Setting Up Data - Data Reservation
+    setForms() {
+      const formsData = this.forms
+      $.each(formData.data, (key, value) => {
+        this.$set(formsData, value.unique_id, [])
+      })
+      console.log(formsData)
+      return formsData
+    },
+
+    // Buttons - Submissions
     prev() {
       this.activeStep.stepId--;
-      this.activeStep.form = this.form_data[this.activeStep.stepId];
+      this.activeStep.form = this.form_data.data[this.activeStep.stepId];
     },
     next() {
       if (this.isValid()) {
@@ -194,7 +228,7 @@ export default {
           setTimeout(() => {
             this.submitStatus = 'OK'
             this.activeStep.stepId++;
-            this.activeStep.form = this.form_data[this.activeStep.stepId];
+            this.activeStep.form = this.form_data.data[this.activeStep.stepId];
             this.errors.pop()
           }, 600)
         }
@@ -207,6 +241,19 @@ export default {
         console.log("Invalid")
       }
     },
+    submitForm() {
+      if (this.form_data.options.goodbye_message.title == null) {   // Goodbye Message Control
+        console.log(this.forms)
+        alert('SUBMITTED')
+        setTimeout(() => {
+          router.go(0)
+        }, 1000)
+      } else {
+        return this.goodbyeExist = true
+      }
+    },
+
+    // Validations
     validEmail(email) {
       const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(email);
@@ -214,17 +261,6 @@ export default {
     isValid() {
       return !this.activeStep.form.is_required || (this.forms[this.activeStep.form.unique_id] && this.forms[this.activeStep.form.unique_id].length);
     },
-    submitForm() {
-      console.log(this.forms)
-    }
-  },
-  computed: {
-    // formsData() {
-    //   const formsData = this.forms
-    //   $.each(formData, (key, value) => {
-    //     formsData.push(value.unique_id)
-    //   })
-    // }
   },
 }
 </script>
