@@ -133,7 +133,7 @@
                   <label for="last" class="form-check-label">Please confirm that it is okay for us to contact you about
                     this information as well as products and services.
                     (You will always be given the right to unsubscribe at any point in the future)</label>
-                  <input type="checkbox" id="last" class="form-check-input" v-model="forms[activeStep.form.unique_id]">
+                  <input type="checkbox" id="last" class="form-check-input" :value="activeStep.form.form_field_options[0].option_value" v-model="forms[activeStep.form.unique_id]">
                   <p class="typo__p" v-if="submitStatus === 'ERROR'">You have to confirm that.</p>
                   <p class="typo__p" v-if="submitStatus === 'PENDING'">Sending...</p>
                 </div>
