@@ -1,4 +1,8 @@
-# typeform
+# Multi Step Form
+
+```
+Multi step form with dynamic data, using Vue JS.
+```
 
 ## Project setup
 ```
