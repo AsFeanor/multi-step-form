@@ -2,16 +2,27 @@
   <div class="container mt-5">
     <WelcomeMessage @goToForm="goToForm" v-if="welcomeExist === true"></WelcomeMessage>
     <div v-if="welcomeExist === false && goodbyeExist === false" class="row justify-content-center">
-      <div class="col-6">
+      <div class="col-12 mb-5">
+        <div class="progress">
+          <div class="progress-bar" role="progressbar"
+               :style="{ width: ((activeStep.stepId + 1)/(formLength/100)) + '%' }"
+               :aria-valuenow="activeStep.stepId + 1" aria-valuemin="0"
+               :aria-valuemax="formLength">{{ activeStep.stepId + 1 }}
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
         <form id="myForm" @submit.prevent="next">
           <div class="form-group container" @keyup.left="prev" v-if="activeStep.form.field_type_id === 7">
             <div class="row">
               <div class="col-12">
-                <label for="email">{{ activeStep.form.label }}</label>
+                <label for="email">{{ activeStep.form.label }}
+                  <p v-if="activeStep.form.is_required" class="text-danger d-inline">*</p>
+                </label>
                 <input type="email" class="form-control" id="email" v-model="forms[activeStep.form.unique_id]">
                 <small class="form-text text-muted"
                        v-if="activeStep.form.is_required && forms[activeStep.form.unique_id].length === 0">Email is
-                  required...</small>
+                  required...</small> <!-- TODO -->
                 <p class="typo__p" v-if="submitStatus === 'ERROR'">Please fill the form correctly.</p>
                 <p class="typo__p" v-if="submitStatus === 'PENDING'">Sending...</p>
               </div>
@@ -25,7 +36,9 @@
                v-if="activeStep.form.field_type_id === 3">
             <div class="row">
               <div class="col-12">
-                <label for="yes-no">{{ activeStep.form.label }}</label>
+                <label for="yes-no">{{ activeStep.form.label }}
+                  <p v-if="activeStep.form.is_required" class="text-danger d-inline">*</p>
+                </label>
                 <select class="form-control" id="yes-no" v-model="forms[activeStep.form.unique_id]">
                   <option v-for="(option, key) in activeStep.form.form_field_options" :key="key">
                     {{ option.option_label }}
@@ -45,7 +58,9 @@
                v-if="activeStep.form.field_type_id === 4 && activeStep.form.extra.length === 0">
             <div class="row">
               <div class="col-12">
-                <div>{{ activeStep.form.label }}</div>
+                <div>{{ activeStep.form.label }}
+                  <p v-if="activeStep.form.is_required" class="text-danger d-inline">*</p>
+                </div>
                 <div class="form-check form-check-inline d-flex justify-content-center"
                      v-for="(option, key) in activeStep.form.form_field_options" :key="key">
                   <input type="checkbox" class="form-check-input" :id="option.form_field_option_id"
@@ -65,7 +80,9 @@
                v-if="activeStep.form.field_type_id ===6">
             <div class="row">
               <div class="col-12 d-flex justify-content-center">
-                <label for="time-start" class="placeholder">{{ activeStep.form.label }}</label>
+                <label for="time-start" class="placeholder">{{ activeStep.form.label }}
+                  <p v-if="activeStep.form.is_required" class="text-danger d-inline">*</p>
+                </label>
               </div>
               <div class="col-12 d-flex justify-content-center">
                 <input id="time-start" class="input" type="datetime-local" placeholder=" "
@@ -83,7 +100,9 @@
                v-if="activeStep.form.field_type_id === 8">
             <div class="row">
               <div class="col-12">
-                <label for="phone">{{ activeStep.form.label }}</label>
+                <label for="phone">{{ activeStep.form.label }}
+                  <p v-if="activeStep.form.is_required" class="text-danger d-inline">*</p>
+                </label>
                 <input type="tel" class="form-control" id="phone" v-model="forms[activeStep.form.unique_id]">
                 <p class="typo__p" v-if="submitStatus === 'ERROR'">Please fill the form correctly.</p>
                 <p class="typo__p" v-if="submitStatus === 'PENDING'">Sending...</p>
@@ -98,7 +117,9 @@
                v-if="activeStep.form.field_type_id === 23">
             <div class="row">
               <div class="col-12">
-                <label for="name">{{ activeStep.form.label }}</label>
+                <label for="name">{{ activeStep.form.label }}
+                  <p v-if="activeStep.form.is_required" class="text-danger d-inline">*</p>
+                </label>
                 <input type="text" class="form-control" id="name" v-model="forms[activeStep.form.unique_id]"><br>
                 <p class="typo__p" v-if="submitStatus === 'ERROR'">Please fill the form correctly.</p>
                 <p class="typo__p" v-if="submitStatus === 'PENDING'">Sending...</p>
@@ -115,7 +136,9 @@
                v-if="activeStep.form.field_type_id === 24">
             <div class="row">
               <div class="col-12">
-                <label for="surname">{{ activeStep.form.label }}</label>
+                <label for="surname">{{ activeStep.form.label }}
+                  <p v-if="activeStep.form.is_required" class="text-danger d-inline">*</p>
+                </label>
                 <input type="text" class="form-control" id="surname" v-model="forms[activeStep.form.unique_id]">
                 <p class="typo__p" v-if="submitStatus === 'ERROR'">Please fill the form correctly.</p>
                 <p class="typo__p" v-if="submitStatus === 'PENDING'">Sending...</p>
@@ -130,7 +153,9 @@
                v-if="activeStep.form.field_type_id === 2">
             <div class="row">
               <div class="col-12">
-                <label for="number">{{ activeStep.form.label }}</label>
+                <label for="number">{{ activeStep.form.label }}
+                  <p v-if="activeStep.form.is_required" class="text-danger d-inline">*</p>
+                </label>
                 <input type="number" class="form-control" id="number" v-model="forms[activeStep.form.unique_id]">
                 <p class="typo__p" v-if="submitStatus === 'ERROR'">Please fill the form correctly.</p>
                 <p class="typo__p" v-if="submitStatus === 'PENDING'">Sending...</p>
@@ -145,7 +170,9 @@
                v-if="activeStep.form.field_type_id === 5">
             <div class="row">
               <div class="col-12">
-                <div>{{ activeStep.form.label }}</div>
+                <div>{{ activeStep.form.label }}
+                  <p v-if="activeStep.form.is_required" class="text-danger d-inline">*</p>
+                </div>
                 <div class="form-check form-check-inline d-flex justify-content-center"
                      v-for="(option, key) in activeStep.form.form_field_options" :key="key">
                   <input type="radio" class="form-check-input" :id="option.form_field_option_id"
@@ -165,7 +192,9 @@
                v-if="activeStep.form.field_type_id === 9">
             <div class="row">
               <div class="col-12">
-                <label for="textarea">{{ activeStep.form.label }}</label>
+                <label for="textarea">{{ activeStep.form.label }}
+                  <p v-if="activeStep.form.is_required" class="text-danger d-inline">*</p>
+                </label>
                 <textarea id="textarea" class="form-control" cols="30" rows="10"
                           v-model="forms[activeStep.form.unique_id]"></textarea>
                 <p class="typo__p" v-if="submitStatus === 'ERROR'">Please fill the form correctly.</p>
@@ -181,7 +210,9 @@
                v-if="activeStep.form.field_type_id === 11">
             <div class="row">
               <div class="col-12">
-                <div>{{ activeStep.form.label }}</div>
+                <div>{{ activeStep.form.label }}
+                  <p v-if="activeStep.form.is_required" class="text-danger d-inline">*</p>
+                </div>
                 <div class="form-check form-check-inline d-flex justify-content-center"
                      v-for="(option, key) in activeStep.form.form_field_options" :key="key">
                   <input type="radio" class="form-check-input" :id="option.form_field_option_id"
@@ -201,7 +232,9 @@
                v-if="activeStep.form.field_type_id === 26">
             <div class="row">
               <div class="col-12">
-                <label for="salutation">{{ activeStep.form.label }}</label>
+                <label for="salutation">{{ activeStep.form.label }}
+                  <p v-if="activeStep.form.is_required" class="text-danger d-inline">*</p>
+                </label>
                 <select class="form-control" id="salutation" v-model="forms[activeStep.form.unique_id]">
                   <option v-for="(option, key) in activeStep.form.form_field_options" :key="key">
                     {{ option.option_label }}
@@ -237,7 +270,9 @@
             <div class="row">
               <div class="col-12">
                 <div class="form-check form-check-inline">
-                  <label for="last" class="form-check-label">{{ activeStep.form.label }}</label>
+                  <label for="last" class="form-check-label">{{ activeStep.form.label }}
+                    <p v-if="activeStep.form.is_required" class="text-danger d-inline">*</p>
+                  </label>
                   <input type="checkbox" id="last" class="form-check-input"
                          :value="activeStep.form.form_field_options[0].option_value"
                          v-model="forms[activeStep.form.unique_id]">
@@ -253,10 +288,6 @@
             </div>
           </div>
         </form>
-      </div>
-      <div class="col-6">
-        <pre>{{ errors }}</pre>
-        <pre>{{ forms }}</pre>
       </div>
     </div>
     <GoodbyeMessage @submitOnGoodbye="SubmitOnGoodbye" v-if="goodbyeExist === true"></GoodbyeMessage>
@@ -301,13 +332,13 @@ export default {
       return this.welcomeExist = false
     },
 
-    // Goodbye Message Controls
+    // Goodbye Message Controls - (Look submitForm())
     SubmitOnGoodbye() {
       console.log(this.forms);
-      alert('SUBMITTED')
+      this.successExist()
       setTimeout(() => {
         this.goodbyeExist = false
-        router.go(0)
+        this.redirectExist()
       }, 1000)
     },
 
@@ -353,10 +384,10 @@ export default {
         if (this.form_data.options.goodbye_message.title == null) {   // Goodbye Message Control
           console.log(this.forms)
           this.submitStatus = 'PENDING'
-          alert('SUBMITTED')
+          this.successExist()
           setTimeout(() => {
             this.submitStatus = 'OK'
-            router.go(0)
+            this.redirectExist()
           }, 1000)
         } else {
           return this.goodbyeExist = true
@@ -364,6 +395,24 @@ export default {
       } else {
         this.submitStatus = 'ERROR'
         console.log("Invalid")
+      }
+    },
+
+    // Success Message Control - On Submit
+    successExist() {
+      if (this.form_data.success_message == null) {
+        alert("SUBMITTED")
+      } else {
+        alert(this.form_data.success_message)
+      }
+    },
+
+    // Redirect Link Control - On Submit
+    redirectExist() {
+      if (this.form_data.redirect_url == null) {
+        router.go(0)
+      } else {
+        window.open(this.form_data.redirect_url, '_self')
       }
     },
 
@@ -376,6 +425,14 @@ export default {
       return !this.activeStep.form.is_required || (this.forms[this.activeStep.form.unique_id] && this.forms[this.activeStep.form.unique_id].length);
     },
   },
+
+  computed: {
+    // Maximum Value For Progress Bar
+    formLength() {
+      const maxValue = Object.keys(this.forms).length
+      return maxValue
+    }
+  }
 }
 </script>
 

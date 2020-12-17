@@ -1,4 +1,6 @@
 {
+   "redirect_url": "https://google.com",
+   "success_message": "Thank you for filling out the form! Our team will review the information you provided and contact you as soon as possible.",
    "options": {
       "page": {
          "page_title": "Form Ege'nin",
