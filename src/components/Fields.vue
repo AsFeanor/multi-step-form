@@ -80,7 +80,7 @@
             </div>
           </div>
           <div class="form-group container" @keyup.enter="next" @keyup.left="prev"
-               v-if="activeStep.form.field_type_id ===8">
+               v-if="activeStep.form.field_type_id === 8">
             <div class="row">
               <div class="col-12">
                 <label for="phone">{{ activeStep.form.label }}</label>
@@ -112,7 +112,7 @@
             </div>
           </div>
           <div class="form-group container" @keyup.enter="next" @keyup.left="prev"
-               v-if="activeStep.form.field_type_id ===24">
+               v-if="activeStep.form.field_type_id === 24">
             <div class="row">
               <div class="col-12">
                 <label for="surname">{{ activeStep.form.label }}</label>
@@ -126,18 +126,125 @@
               </div>
             </div>
           </div>
+          <div class="form-group container" @keyup.enter="next" @keyup.left="prev"
+               v-if="activeStep.form.field_type_id === 2">
+            <div class="row">
+              <div class="col-12">
+                <label for="number">{{ activeStep.form.label }}</label>
+                <input type="number" class="form-control" id="number" v-model="forms[activeStep.form.unique_id]">
+                <p class="typo__p" v-if="submitStatus === 'ERROR'">Please fill the form correctly.</p>
+                <p class="typo__p" v-if="submitStatus === 'PENDING'">Sending...</p>
+              </div>
+              <div class="col-12 mt-2 d-flex justify-content-between">
+                <button @click.prevent="prev" class="btn btn-outline-primary">Previous</button>
+                <button @submit.prevent="next" class="btn btn-outline-primary">Next</button>
+              </div>
+            </div>
+          </div>
+          <div class="form-group container" @keyup.enter="next" @keyup.left="prev"
+               v-if="activeStep.form.field_type_id === 5">
+            <div class="row">
+              <div class="col-12">
+                <div>{{ activeStep.form.label }}</div>
+                <div class="form-check form-check-inline d-flex justify-content-center"
+                     v-for="(option, key) in activeStep.form.form_field_options" :key="key">
+                  <input type="radio" class="form-check-input" :id="option.form_field_option_id"
+                         :value="option.option_value" v-model="forms[activeStep.form.unique_id]">
+                  <label :for="option.form_field_option_id" class="form-check-label">{{ option.option_label }}</label>
+                </div>
+                <p class="typo__p" v-if="submitStatus === 'ERROR'">Please select one of the options.</p>
+                <p class="typo__p" v-if="submitStatus === 'PENDING'">Sending...</p>
+              </div>
+              <div class="col-12 mt-2 d-flex justify-content-between">
+                <button @click.prevent="prev" class="btn btn-outline-primary">Previous</button>
+                <button @submit.prevent="next" class="btn btn-outline-primary">Next</button>
+              </div>
+            </div>
+          </div>
+          <div class="form-group container" @keyup.enter="next" @keyup.left="prev"
+               v-if="activeStep.form.field_type_id === 9">
+            <div class="row">
+              <div class="col-12">
+                <label for="textarea">{{ activeStep.form.label }}</label>
+                <textarea id="textarea" class="form-control" cols="30" rows="10"
+                          v-model="forms[activeStep.form.unique_id]"></textarea>
+                <p class="typo__p" v-if="submitStatus === 'ERROR'">Please fill the form correctly.</p>
+                <p class="typo__p" v-if="submitStatus === 'PENDING'">Sending...</p>
+              </div>
+              <div class="col-12 mt-2 d-flex justify-content-between">
+                <button @click.prevent="prev" class="btn btn-outline-primary">Previous</button>
+                <button @submit.prevent="next" class="btn btn-outline-primary">Next</button>
+              </div>
+            </div>
+          </div>
+          <div class="form-group container" @keyup.enter="next" @keyup.left="prev"
+               v-if="activeStep.form.field_type_id === 11">
+            <div class="row">
+              <div class="col-12">
+                <div>{{ activeStep.form.label }}</div>
+                <div class="form-check form-check-inline d-flex justify-content-center"
+                     v-for="(option, key) in activeStep.form.form_field_options" :key="key">
+                  <input type="radio" class="form-check-input" :id="option.form_field_option_id"
+                         :value="option.option_value" v-model="forms[activeStep.form.unique_id]">
+                  <label :for="option.form_field_option_id" class="form-check-label">{{ option.option_label }}</label>
+                </div>
+                <p class="typo__p" v-if="submitStatus === 'ERROR'">Please choose one of the options.</p>
+                <p class="typo__p" v-if="submitStatus === 'PENDING'">Sending...</p>
+              </div>
+              <div class="col-12 mt-2 d-flex justify-content-between">
+                <button @click.prevent="prev" class="btn btn-outline-primary">Previous</button>
+                <button @submit.prevent="next" class="btn btn-outline-primary">Next</button>
+              </div>
+            </div>
+          </div>
+          <div class="form-group container" @keyup.enter="next" @keyup.left="prev"
+               v-if="activeStep.form.field_type_id === 26">
+            <div class="row">
+              <div class="col-12">
+                <label for="salutation">{{ activeStep.form.label }}</label>
+                <select class="form-control" id="salutation" v-model="forms[activeStep.form.unique_id]">
+                  <option v-for="(option, key) in activeStep.form.form_field_options" :key="key">
+                    {{ option.option_label }}
+                  </option>
+                </select>
+                <p class="typo__p" v-if="submitStatus === 'ERROR'">Please select salutation.</p>
+                <p class="typo__p" v-if="submitStatus === 'PENDING'">Sending...</p>
+              </div>
+              <div class="col-12 mt-2 d-flex justify-content-between">
+                <button @click.prevent="prev" class="btn btn-outline-primary">Previous</button>
+                <button @submit.prevent="next" class="btn btn-outline-primary">Next</button>
+              </div>
+            </div>
+          </div>
+          <!--          TODO
+                    <div class="form-group container" @keyup.enter="next" @keyup.left="prev"
+                         v-if="activeStep.form.field_type_id === 2">
+                      <div class="row">
+                        <div class="col-12">
+
+                          <p class="typo__p" v-if="submitStatus === 'ERROR'">Please fill the form correctly.</p>
+                          <p class="typo__p" v-if="submitStatus === 'PENDING'">Sending...</p>
+                        </div>
+                        <div class="col-12 mt-2 d-flex justify-content-between">
+                          <button @click.prevent="prev" class="btn btn-outline-primary">Previous</button>
+                          <button @submit.prevent="next" class="btn btn-outline-primary">Next</button>
+                        </div>
+                      </div>
+                    </div>
+                   -->
           <div class="form-group container" @keyup.enter.prevent="submitForm" @keyup.left="prev"
                v-if="activeStep.form.field_type_id === 4 && activeStep.form.extra.field_type === 'legacy'">
             <div class="row">
               <div class="col-12">
                 <div class="form-check form-check-inline">
-                  <label for="last" class="form-check-label">Please confirm that it is okay for us to contact you about
-                    this information as well as products and services.
-                    (You will always be given the right to unsubscribe at any point in the future)</label>
-                  <input type="checkbox" id="last" class="form-check-input" :value="activeStep.form.form_field_options[0].option_value" v-model="forms[activeStep.form.unique_id]">
-                  <p class="typo__p" v-if="submitStatus === 'ERROR'">You have to confirm that.</p>
-                  <p class="typo__p" v-if="submitStatus === 'PENDING'">Sending...</p>
+                  <label for="last" class="form-check-label">{{ activeStep.form.label }}</label>
+                  <input type="checkbox" id="last" class="form-check-input"
+                         :value="activeStep.form.form_field_options[0].option_value"
+                         v-model="forms[activeStep.form.unique_id]">
                 </div>
+                <p class="typo__p font-weight-bold text-danger" v-if="submitStatus === 'ERROR'">You have to confirm
+                  that.</p>
+                <p class="typo__p font-weight-bold text-info" v-if="submitStatus === 'PENDING'">Sending...</p>
               </div>
               <div class="col-12 mt-2 d-flex justify-content-between">
                 <button @click.prevent="prev" class="btn btn-outline-primary">Previous</button>
@@ -167,7 +274,7 @@ export default {
   name: "Fields",
   components: {
     WelcomeMessage,
-    GoodbyeMessage
+    GoodbyeMessage,
   },
   data() {
     return {
@@ -198,8 +305,8 @@ export default {
     SubmitOnGoodbye() {
       console.log(this.forms);
       alert('SUBMITTED')
-      this.goodbyeExist = false
       setTimeout(() => {
+        this.goodbyeExist = false
         router.go(0)
       }, 1000)
     },
@@ -242,14 +349,21 @@ export default {
       }
     },
     submitForm() {
-      if (this.form_data.options.goodbye_message.title == null) {   // Goodbye Message Control
-        console.log(this.forms)
-        alert('SUBMITTED')
-        setTimeout(() => {
-          router.go(0)
-        }, 1000)
+      if (this.isValid()) {
+        if (this.form_data.options.goodbye_message.title == null) {   // Goodbye Message Control
+          console.log(this.forms)
+          this.submitStatus = 'PENDING'
+          alert('SUBMITTED')
+          setTimeout(() => {
+            this.submitStatus = 'OK'
+            router.go(0)
+          }, 1000)
+        } else {
+          return this.goodbyeExist = true
+        }
       } else {
-        return this.goodbyeExist = true
+        this.submitStatus = 'ERROR'
+        console.log("Invalid")
       }
     },
 
