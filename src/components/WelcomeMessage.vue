@@ -8,7 +8,7 @@
         <p>{{ form_data.options.welcome_message.description }}</p>
       </div>
       <div class="col-12 d-flex justify-content-center mb-5 mt-3">
-        <button @click.prevent="goToForm" type="submit" class="btn btn-outline-primary">Go to form</button>
+        <button @click.prevent="goToForm" type="submit" class="btn btn-dark">Go to form</button>
       </div>
       <div class="col-12 text-center pt-5 text-info font-weight-bold" v-if="loadStatus === 'LOADING'">
         LOADING...
