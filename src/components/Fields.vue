@@ -1,294 +1,85 @@
 <template>
   <div class="container-fluid mt-5 pt-5">
     <WelcomeMessage @goToForm="goToForm" v-if="welcomeExist"></WelcomeMessage>
+    <pre>{{forms}}</pre>
     <div v-if="welcomeExist === false && goodbyeExist === false">
       <form id="myForm" @submit.prevent="next" @keydown.enter.prevent="next">
         <div class="row justify-content-center mt-5 ">
           <div class="col-7">
             <div class="form-group container" v-if="activeStep.form.field_type_id === 7">
               <div class="row">
-                <div class="col-12">
-                  <label for="email"><span class="text-muted">{{ activeStep.stepId + 1 }}&rarr; </span>
-                    <span class="font-weight-bold">{{ activeStep.form.label }}</span>
-                    <p v-if="activeStep.form.is_required" class="text-danger d-inline">*</p>
-                  </label>
-                  <input type="email" class="form-control ml-4" id="email" v-model="forms[activeStep.form.unique_id]">
-                  <p class="typo__p" v-if="submitStatus === 'PENDING'">Sending...</p>
-                </div>
-                <div class="col-12 mt-3 ml-4 d-inline-flex">
-                  <button type="submit" @submit.prevent="next" class="btn btn-dark ok-button">Ok</button>
-                  <p class="mt-2 ml-2"><span class="text-muted">Press </span>Enter</p>
-                </div>
+                <email :activeStep="activeStep" :forms="forms" :submitStatus="submitStatus"/>
+                <form-control-buttons @next="next"/>
               </div>
             </div>
             <div class="form-group container" @keyup.left="prev"
                  v-if="activeStep.form.field_type_id === 3">
               <div class="row">
-                <div class="col-12">
-                  <label for="yes-no"><span class="text-muted">{{ activeStep.stepId + 1 }}&rarr; </span>
-                    <span class="font-weight-bold">{{ activeStep.form.label }}</span>
-                    <p v-if="activeStep.form.is_required" class="text-danger d-inline">*</p>
-                  </label>
-                  <select class="form-control ml-4" id="yes-no" v-model="forms[activeStep.form.unique_id]">
-                    <option v-for="(option, key) in activeStep.form.form_field_options" :key="key">
-                      {{ option.option_label }}
-                    </option>
-                  </select>
-                  <p class="typo__p" v-if="submitStatus === 'PENDING'">Sending...</p>
-                </div>
-                <div class="col-12 mt-3 ml-4 d-inline-flex">
-                  <button type="submit" @submit.prevent="next" class="btn btn-dark ok-button">Ok</button>
-                  <p class="mt-2 ml-2"><span class="text-muted">Press </span>Enter</p>
-                </div>
+                <selectbox :submit-status="submitStatus" :forms="forms" :active-step="activeStep"/>
+                <form-control-buttons @next="next"/>
               </div>
             </div>
             <div class="form-group container" @keyup.left="prev"
                  v-if="activeStep.form.field_type_id === 13">
               <div class="row">
-                <div class="col-12 d-flex justify-content-center"><span class="text-muted">{{ activeStep.stepId + 1 }}&rarr; </span>
-                  <span class="font-weight-bold">{{ activeStep.form.label }}</span>
-                  <p v-if="activeStep.form.is_required" class="text-danger d-inline">*</p>
-                  <div class="rating">
-                    <template v-for="option in reverseItems">
-                      <input :id="option.option_label" name="rating" type="radio" :value="option.option_value"
-                             v-model="forms[activeStep.form.unique_id]"/>
-                      <label :for="option.option_label" class=""></label>
-                    </template>
-                  </div>
-                  <p class="typo__p" v-if="submitStatus === 'PENDING'">Sending...</p>
-                </div>
-                <div class="col-12 mt-3 ml-4 d-inline-flex">
-                  <button type="submit" @submit.prevent="next" class="btn btn-dark ok-button">Ok</button>
-                  <p class="mt-2 ml-2"><span class="text-muted">Press </span>Enter</p>
-                </div>
+                <rating :submit-status="submitStatus" :forms="forms" :active-step="activeStep"/>
+                <form-control-buttons @next="next"/>
               </div>
             </div>
             <div class="form-group container" @keyup.left="prev"
                  v-if="activeStep.form.field_type_id === 4 && activeStep.form.extra.length === 0">
               <div class="row">
-                <div class="col-12">
-                  <div><span class="text-muted">{{ activeStep.stepId + 1 }}&rarr; </span><span class="font-weight-bold">{{
-                      activeStep.form.label
-                    }}</span>
-                    <p v-if="activeStep.form.is_required" class="text-danger d-inline">*</p>
-                  </div>
-                  <div class="form-check form-check-inline d-flex justify-content-center"
-                       v-for="(option, key) in activeStep.form.form_field_options" :key="key">
-                    <input type="checkbox" class="form-check-input" :id="option.form_field_option_id"
-                           :value="option.option_value" v-model="forms[activeStep.form.unique_id]">
-                    <label :for="option.form_field_option_id" class="form-check-label">{{ option.option_label }}</label>
-                  </div>
-                  <p class="typo__p" v-if="submitStatus === 'PENDING'">Sending...</p>
-                </div>
-                <div class="col-12 mt-3 ml-4 d-inline-flex">
-                  <button type="submit" @submit.prevent="next" class="btn btn-dark ok-button">Ok</button>
-                  <p class="mt-2 ml-2"><span class="text-muted">Press </span>Enter</p>
-                </div>
+                <checkbox :submit-status="submitStatus" :forms="forms" :active-step="activeStep"/>
+                <form-control-buttons @next="next"/>
               </div>
             </div>
             <div class="form-group container" @keyup.left="prev"
                  v-if="activeStep.form.field_type_id ===6">
               <div class="row">
-                <div class="col-12 d-flex justify-content-center">
-                  <label for="time-start" class="placeholder"><span class="text-muted">{{
-                      activeStep.stepId + 1
-                    }}&rarr; </span><span class="font-weight-bold">{{ activeStep.form.label }}</span>
-                    <p v-if="activeStep.form.is_required" class="text-danger d-inline">*</p>
-                  </label>
-                </div>
-                <div class="col-12 d-flex justify-content-center">
-                  <input id="time-start" class="input" type="datetime-local" placeholder=" "
-                         v-model="forms[activeStep.form.unique_id]"/>
-                </div>
-                <p class="typo__p" v-if="submitStatus === 'PENDING'">Sending...</p>
-                <div class="col-12 mt-3 ml-4 d-inline-flex">
-                  <button type="submit" @submit.prevent="next" class="btn btn-dark ok-button">Ok</button>
-                  <p class="mt-2 ml-2"><span class="text-muted">Press </span>Enter</p>
-                </div>
+                <date-picker :submit-status="submitStatus" :forms="forms" :active-step="activeStep"/>
+                <form-control-buttons @next="next"/>
               </div>
             </div>
             <div class="form-group container" @keyup.left="prev"
                  v-if="activeStep.form.field_type_id === 8">
               <div class="row">
-                <div class="col-12">
-                  <label for="phone"><span class="text-muted">{{ activeStep.stepId + 1 }}&rarr; </span><span
-                      class="font-weight-bold">{{ activeStep.form.label }}</span>
-                    <p v-if="activeStep.form.is_required" class="text-danger d-inline">*</p>
-                  </label>
-                  <input type="tel" class="form-control ml-4" id="phone" v-model="forms[activeStep.form.unique_id]">
-                  <p class="typo__p" v-if="submitStatus === 'PENDING'">Sending...</p>
-                </div>
-                <div class="col-12 mt-3 ml-4 d-inline-flex">
-                  <button type="submit" @submit.prevent="next" class="btn btn-dark ok-button">Ok</button>
-                  <p class="mt-2 ml-2"><span class="text-muted">Press </span>Enter</p>
-                </div>
+                <phone :submit-status="submitStatus" :forms="forms" :active-step="activeStep"/>
+                <form-control-buttons @next="next"/>
               </div>
             </div>
             <div class="form-group container" @keyup.left="prev"
-                 v-if="activeStep.form.field_type_id === 23">
+                 v-if="activeStep.form.field_type_id === 23 || activeStep.form.field_type_id === 24">
               <div class="row">
-                <div class="col-12">
-                  <label for="name"><span class="text-muted">{{ activeStep.stepId + 1 }}&rarr; </span><span
-                      class="font-weight-bold">{{ activeStep.form.label }}</span>
-                    <p v-if="activeStep.form.is_required" class="text-danger d-inline">*</p>
-                  </label>
-                  <input type="text" class="form-control ml-4" id="name" v-model="forms[activeStep.form.unique_id]"><br>
-                  <p class="typo__p" v-if="submitStatus === 'PENDING'">Sending...</p>
-                </div>
-                <div class="col-12 mt-3 ml-4 d-inline-flex">
-                  <button type="submit" @submit.prevent="next" class="btn btn-dark ok-button">Ok</button>
-                  <p class="mt-2 ml-2"><span class="text-muted">Press </span>Enter</p>
-                </div>
-              </div>
-            </div>
-            <div class="form-group container" @keyup.left="prev"
-                 v-if="activeStep.form.field_type_id === 24">
-              <div class="row">
-                <div class="col-12">
-                  <label for="surname"><span class="text-muted">{{ activeStep.stepId + 1 }}&rarr; </span><span
-                      class="font-weight-bold">{{ activeStep.form.label }}</span>
-                    <p v-if="activeStep.form.is_required" class="text-danger d-inline">*</p>
-                  </label>
-                  <input type="text" class="form-control ml-4" id="surname" v-model="forms[activeStep.form.unique_id]">
-                  <p class="typo__p" v-if="submitStatus === 'PENDING'">Sending...</p>
-                </div>
-                <div class="col-12 mt-3 ml-4 d-inline-flex">
-                  <button type="submit" @submit.prevent="next" class="btn btn-dark ok-button">Ok</button>
-                  <p class="mt-2 ml-2"><span class="text-muted">Press </span>Enter</p>
-                </div>
+                <name-surname :submit-status="submitStatus" :forms="forms" :active-step="activeStep"/>
+                <form-control-buttons @next="next"/>
               </div>
             </div>
             <div class="form-group container" @keydown.enter="next" @keyup.left="prev"
                  v-if="activeStep.form.field_type_id === 2">
               <div class="row">
-                <div class="col-12">
-                  <label for="number"><span class="text-muted">{{ activeStep.stepId + 1 }}&rarr; </span><span
-                      class="font-weight-bold">{{ activeStep.form.label }}</span>
-                    <p v-if="activeStep.form.is_required" class="text-danger d-inline">*</p>
-                  </label>
-                  <input type="number" class="form-control ml-4" id="number" v-model="forms[activeStep.form.unique_id]">
-                  <p class="typo__p" v-if="submitStatus === 'PENDING'">Sending...</p>
-                </div>
-                <div class="col-12 mt-3 ml-4 d-inline-flex">
-                  <button type="submit" @submit.prevent="next" class="btn btn-dark ok-button">Ok</button>
-                  <p class="mt-2 ml-2"><span class="text-muted">Press </span>Enter</p>
-                </div>
+                <number :submit-status="submitStatus" :forms="forms" :active-step="activeStep"/>
+                <form-control-buttons @next="next"/>
               </div>
             </div>
             <div class="form-group container" @keyup.left="prev"
                  v-if="activeStep.form.field_type_id === 5">
               <div class="row">
-                <div class="col-12">
-                  <div><span class="text-muted">{{ activeStep.stepId + 1 }}&rarr; </span><span class="font-weight-bold">{{
-                      activeStep.form.label
-                    }}</span>
-                    <p v-if="activeStep.form.is_required" class="text-danger d-inline">*</p>
-                  </div>
-                  <div class="form-check form-check-inline d-flex justify-content-center"
-                       v-for="(option, key) in activeStep.form.form_field_options" :key="key">
-                    <input type="radio" class="form-check-input" :id="option.form_field_option_id"
-                           :value="option.option_value" v-model="forms[activeStep.form.unique_id]">
-                    <label :for="option.form_field_option_id" class="form-check-label">{{ option.option_label }}</label>
-                  </div>
-                  <p class="typo__p" v-if="submitStatus === 'PENDING'">Sending...</p>
-                </div>
-                <div class="col-12 mt-3 ml-4 d-inline-flex">
-                  <button type="submit" @submit.prevent="next" class="btn btn-dark ok-button">Ok</button>
-                  <p class="mt-2 ml-2"><span class="text-muted">Press </span>Enter</p>
-                </div>
+                <radio :submit-status="submitStatus" :forms="forms" :active-step="activeStep"/>
+                <form-control-buttons @next="next"/>
               </div>
             </div>
             <div class="form-group container" @keyup.left="prev"
                  v-if="activeStep.form.field_type_id === 9">
               <div class="row">
-                <div class="col-12">
-                  <label for="textarea"><span class="text-muted">{{ activeStep.stepId + 1 }}&rarr; </span><span
-                      class="font-weight-bold">{{ activeStep.form.label }}</span>
-                    <p v-if="activeStep.form.is_required" class="text-danger d-inline">*</p>
-                  </label>
-                  <textarea id="textarea" class="form-control ml-4" cols="30" rows="10"
-                            v-model="forms[activeStep.form.unique_id]"></textarea>
-                  <p class="typo__p" v-if="submitStatus === 'PENDING'">Sending...</p>
-                </div>
-                <div class="col-12 mt-3 ml-4 d-inline-flex">
-                  <button type="submit" @submit.prevent="next" class="btn btn-dark ok-button">Ok</button>
-                  <p class="mt-2 ml-2"><span class="text-muted">Press </span>Enter</p>
-                </div>
-              </div>
-            </div>
-            <div class="form-group container" @keyup.left="prev"
-                 v-if="activeStep.form.field_type_id === 11">
-              <div class="row">
-                <div class="col-12">
-                  <div><span class="text-muted">{{ activeStep.stepId + 1 }}&rarr; </span><span class="font-weight-bold">{{
-                      activeStep.form.label
-                    }}</span>
-                    <p v-if="activeStep.form.is_required" class="text-danger d-inline">*</p>
-                  </div>
-                  <div class="form-check form-check-inline d-flex justify-content-center"
-                       v-for="(option, key) in activeStep.form.form_field_options" :key="key">
-                    <input type="radio" class="form-check-input" :id="option.form_field_option_id"
-                           :value="option.option_value" v-model="forms[activeStep.form.unique_id]">
-                    <label :for="option.form_field_option_id" class="form-check-label">{{ option.option_label }}</label>
-                  </div>
-                  <p class="typo__p" v-if="submitStatus === 'PENDING'">Sending...</p>
-                </div>
-                <div class="col-12 mt-3 ml-4 d-inline-flex">
-                  <button type="submit" @submit.prevent="next" class="btn btn-dark ok-button">Ok</button>
-                  <p class="mt-2 ml-2"><span class="text-muted">Press </span>Enter</p>
-                </div>
+                <text-area :submit-status="submitStatus" :forms="forms" :active-step="activeStep"/>
+                <form-control-buttons @next="next"/>
               </div>
             </div>
             <div class="form-group container" @keyup.left="prev"
                  v-if="activeStep.form.field_type_id === 26">
               <div class="row">
-                <div class="col-12">
-                  <label for="salutation"><span class="text-muted">{{ activeStep.stepId + 1 }}&rarr; </span><span
-                      class="font-weight-bold">{{ activeStep.form.label }}</span>
-                    <p v-if="activeStep.form.is_required" class="text-danger d-inline">*</p>
-                  </label>
-                  <select class="form-control ml-4" id="salutation" v-model="forms[activeStep.form.unique_id]">
-                    <option v-for="(option, key) in activeStep.form.form_field_options" :key="key">
-                      {{ option.option_label }}
-                    </option>
-                  </select>
-                  <p class="typo__p" v-if="submitStatus === 'PENDING'">Sending...</p>
-                </div>
-                <div class="col-12 mt-3 ml-4 d-inline-flex">
-                  <button type="submit" @submit.prevent="next" class="btn btn-dark ok-button">Ok</button>
-                  <p class="mt-2 ml-2"><span class="text-muted">Press </span>Enter</p>
-                </div>
-              </div>
-            </div>
-            <div class="form-group container" @keyup.left="prev"
-                 v-if="activeStep.form.field_type_id === 22">
-              <div class="row">
-                <div class="col-12">
-                  <label for="address"><span class="text-muted">{{ activeStep.stepId + 1 }}&rarr; </span><span
-                      class="font-weight-bold">{{ activeStep.form.label }}</span></label>
-                  <div class="input-group">
-                    <input type="text" id="address" class="form-control" style="width: 100% !important;"
-                           :placeholder="activeStep.form.placeholder" :aria-label="activeStep.form.placeholder"
-                           aria-describedby="basic-addon2"
-                           v-model="forms[activeStep.form.unique_id]">
-                    <div class="input-group-append">
-                      <button @click="getAddresses" class="btn btn-outline-dark" type="button">Find <strong> > </strong>
-                      </button>
-                    </div>
-                  </div>
-                  <div>
-                    <select class="custom-select" size="5" v-if="address" v-model="forms[activeStep.form.unique_id]">
-                      <option @click="setAddress(address, activeStep.form.unique_id)" v-for="address in addresses">
-                        {{ address.summaryline }}
-                      </option>
-                    </select>
-                    <p class="typo__p" v-if="submitStatus === 'PENDING'">Sending...</p>
-                  </div>
-                </div>
-                <div class="col-12 mt-3 ml-4 d-inline-flex">
-                  <button type="submit" @submit.prevent="next" class="btn btn-dark ok-button">Ok</button>
-                  <p class="mt-2 ml-2"><span class="text-muted">Press </span>Enter</p>
-                </div>
+                <salutation :submit-status="submitStatus" :forms="forms" :active-step="activeStep"/>
+                <form-control-buttons @next="next"/>
               </div>
             </div>
             <div class="form-group container" @keyup.enter.prevent="submitForm" @keyup.left="prev"
@@ -353,8 +144,18 @@
 import formData from '../../form_data.json';
 import WelcomeMessage from "@/components/WelcomeMessage";
 import GoodbyeMessage from "@/components/GoodbyeMessage";
+import FormControlButtons from "@/components/FormControlButtons";
 import Email from "@/components/Field Type/Email";
-import Rating from "@/components/Rating";
+import Selectbox from "@/components/Field Type/Selectbox";
+import Rating from "@/components/Field Type/Rating";
+import Checkbox from "@/components/Field Type/Checkbox";
+import DatePicker from "@/components/Field Type/DatePicker";
+import Phone from "@/components/Field Type/Phone";
+import NameSurname from "@/components/Field Type/NameSurname";
+import Number from "@/components/Field Type/Number";
+import Radio from "@/components/Field Type/Radio";
+import TextArea from "@/components/Field Type/TextArea";
+import Salutation from "@/components/Field Type/Salutation";
 import router from "@/router";
 import axios from 'axios';
 import Swal from 'sweetalert2'
@@ -366,7 +167,17 @@ export default {
     WelcomeMessage,
     GoodbyeMessage,
     Rating,
-    Email
+    FormControlButtons,
+    Email,
+    Selectbox,
+    Checkbox,
+    DatePicker,
+    Phone,
+    NameSurname,
+    Number,
+    Radio,
+    TextArea,
+    Salutation,
   },
   data() {
     return {
@@ -399,42 +210,13 @@ export default {
       return this.welcomeExist = false
     },
 
-    // Setting Address
-    setAddress(address, uniqueId) {
-      let Address1;
-      if (address.buildingname) {
-        Address1 = address.buildingname
-      } else {
-        Address1 = address.number
-      }
-      this.forms[uniqueId] = {
-        address_1: Address1,
-        address_2: address.street,
-        address_3: address.dependentlocality ? address.dependentlocality : " ",
-        address_4: address.posttown,
-        address_5: address.county,
-        country_id: 1,
-        display_name: address.summaryline,
-        postcode: address.postcode,
-      }
-    },
-
     // Setting Up Data - Data Reservation
     setForms() {
       const formsData = this.forms
       $.each(formData.data, (key, value) => {
         this.$set(formsData, value.unique_id, [])
       })
-      // console.log(formsData)
       return formsData
-    },
-
-    // Welcome Message Controls
-    setWelcomeExist() {
-      this.welcomeExist = formData.options.welcome_message.title != null;
-    },
-    goToForm() {
-      return this.welcomeExist = false
     },
 
     // Buttons - Submissions
@@ -515,62 +297,12 @@ export default {
     formLength() {
       return Object.keys(this.forms).length
     },
-
-    // Reversed Array for Rating
-    reverseItems() {
-      return this.activeStep.form.form_field_options.slice().reverse();
-    }
   }
 }
 </script>
 
 <style scoped>
-.rating {
-  transform: rotateY(180deg);
-}
-
-.rating:not(:checked) > input {
-  position: absolute;
-  clip: rect(0, 0, 0, 0);
-}
-
-.rating:not(:checked) > label {
-  width: 1em;
-  overflow: hidden;
-  white-space: nowrap;
-  cursor: pointer;
-  font-size: 300%;
-  color: #ddd;
-}
-
-.rating:not(:checked) > label:before {
-  content: '★ ';
-}
-
-.rating > input:checked ~ label {
-  color: #FFD700;
-}
-
-.rating:not(:checked) > label:hover,
-.rating:not(:checked) > label:hover ~ label {
-  color: #FFD700;
-}
-
-.rating > input:checked + label:hover,
-.rating > input:checked + label:hover ~ label,
-.rating > input:checked ~ label:hover,
-.rating > input:checked ~ label:hover ~ label,
-.rating > label:hover ~ input:checked ~ label {
-  color: #FFD700;
-}
-
-.rating > label:active {
-  position: relative;
-  top: 2px;
-  left: 2px;
-}
-
-.form-control {
+::v-deep .form-control {
   border-top: none !important;
   border-left: none !important;
   border-right: none !important;

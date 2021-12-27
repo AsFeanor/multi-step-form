@@ -1,16 +1,18 @@
 <template>
   <div class="col-12">
-    <label for="email">{{ activeStep.form.label }}
+    <label for="textarea"><span class="text-muted">{{ activeStep.stepId + 1 }}&rarr; </span><span
+        class="font-weight-bold">{{ activeStep.form.label }}</span>
       <p v-if="activeStep.form.is_required" class="text-danger d-inline">*</p>
     </label>
-    <input type="email" class="form-control" id="email" v-model="forms[activeStep.form.unique_id]">
+    <textarea id="textarea" class="form-control ml-4" cols="30" rows="10"
+              v-model="forms[activeStep.form.unique_id]"></textarea>
     <p class="typo__p" v-if="submitStatus === 'PENDING'">Sending...</p>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Email",
+  name: "TextArea",
   props: {
     activeStep: {
       required: true,
